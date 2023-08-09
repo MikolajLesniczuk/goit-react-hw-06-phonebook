@@ -1,16 +1,18 @@
 import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
 import s from './ConatctForm.module.css';
+import { addContacts } from 'redux/actions';
+import { useDispatch } from 'react-redux';
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
   const nanoidID = nanoid();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    const contact = { name, number };
-    addContact(contact);
+    dispatch(addContacts(name, number));
     setName('');
     setNumber('');
   };

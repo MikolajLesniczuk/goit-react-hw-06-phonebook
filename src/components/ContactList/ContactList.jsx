@@ -1,19 +1,34 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Contact } from 'components/contact/contact';
 
-import s from './ContactList.module.css';
+const ContactList = () => {
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filters);
+  const localstorage = JSON.parse(localStorage.getItem('contacts'));
 
-const ContactList = ({ contacts, deleteContact }) => {
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+  const storageContact = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(String(localstorage).toLowerCase())
+  );
+
+  const whatToDisplay =
+    storageContact.length > 0 ? storageContact : filteredContacts;
+
+  console.log(localstorage);
+
   return (
-    <ul>
-      {contacts.map(({ name, number }, index) => (
-        <li className={s.li} key={index}>
-          {name} : {number}
-          <button className={s.button} onClick={() => deleteContact(index)}>
-            usuń
-          </button>
-        </li>
-      ))}
-    </ul>
+    <div>
+      {whatToDisplay.length > 0 ? (
+        whatToDisplay.map(contact => (
+          <Contact key={contact.id} contact={contact} />
+        ))
+      ) : (
+        <p>No contacts found.</p>
+      )}
+    </div>
   );
 };
 

@@ -1,8 +1,15 @@
 import React from 'react';
-
 import s from './Filter.module.css';
+import { useDispatch } from 'react-redux';
+import { filterContact } from 'redux/actions';
 
-const Filter = ({ filter, setFilter }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+  const handleChangeFilter = e => {
+    const inputValue = e.target.value.toLowerCase();
+    dispatch(filterContact(inputValue));
+  };
+
   return (
     <div>
       <p className={s.find}>Find contacts by name :</p>
@@ -10,8 +17,7 @@ const Filter = ({ filter, setFilter }) => {
         className={s.input}
         type="text"
         name="name"
-        value={filter}
-        onChange={e => setFilter(e.target.value)}
+        onChange={handleChangeFilter}
       />
     </div>
   );
