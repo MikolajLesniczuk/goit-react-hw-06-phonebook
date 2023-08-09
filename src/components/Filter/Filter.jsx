@@ -17,6 +17,7 @@ const Filter = () => {
         className={s.input}
         type="text"
         name="name"
+        placeholder="search contacts..."
         onChange={handleChangeFilter}
       />
     </div>

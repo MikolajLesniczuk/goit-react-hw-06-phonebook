@@ -15,7 +15,7 @@ export const Contact = ({ contact }) => {
         <p>---</p>
         <p className={s.number}>{contact.number}</p>
         <button className={s.buton} onClick={handleDelete}>
-          Usuń kontakt
+          Remove contact
         </button>
       </div>
     </>

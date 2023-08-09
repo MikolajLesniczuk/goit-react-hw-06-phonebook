@@ -6,6 +6,7 @@ const ContactList = () => {
   const contacts = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filters);
   const localstorage = JSON.parse(localStorage.getItem('contacts'));
+  // console.log(localstorage);
 
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -16,8 +17,6 @@ const ContactList = () => {
 
   const whatToDisplay =
     storageContact.length > 0 ? storageContact : filteredContacts;
-
-  console.log(localstorage);
 
   return (
     <div>
